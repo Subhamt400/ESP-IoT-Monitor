@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/loc.css">
+</head>
+<body>
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="h4 mb-0" style="font-family: 'Inter', sans-serif;">Sensor Data Viewer</h1>
+                <p class="small text-muted">Filter and download sensor readings</p>
+            </div>
+            <div>
+                <button id="logout-button" class="btn btn-danger" onclick="logout()">Logout</button>
+            </div>
+        </div>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <form id="filterForm" class="row g-3 align-items-end">
+                    <div class="col-md-4">
+                        <label for="lab-name" class="form-label">Select Lab</label>
+                        <select id="lab-name" name="lab-name" class="form-select" onchange="fetchLabDevices()">
+                            <option value="">-- Select Lab --</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3" id="device-selector" style="display:none;">
+                        <label for="esp8266-id" class="form-label">Select Device</label>
+                        <select id="esp8266-id" name="esp8266-id" class="form-select">
+                            <option value="all">-- All Devices --</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="from-date" class="form-label">From</label>
+                        <input type="date" id="from-date" name="from-date" class="form-control" required>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="to-date" class="form-label">To</label>
+                        <input type="date" id="to-date" name="to-date" class="form-control" required>
+                    </div>
+                    <div class="col-md-1 d-grid">
+                        <button type="button" class="btn btn-primary" onclick="fetchRecords()">Fetch</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="data-table" class="mb-3"></div>
+
+        <div class="d-flex justify-content-end">
+            <button id="download-pdf" class="btn btn-outline-secondary" style="display: none;" onclick="downloadPDF()">Download PDF</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="assets/js/loc.js" defer></script>
+</body>
+</html>
